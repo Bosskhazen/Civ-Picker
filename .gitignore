@@ -36,5 +36,5 @@
 *.layout
 
 # Directory
-/bin
-/obj
+bin/
+obj/
