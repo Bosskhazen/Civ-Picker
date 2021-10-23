@@ -6,15 +6,17 @@
 
 using namespace std;
 
+    unsigned int opusChoice(); // Choosing the right Civ game
+    void listVectoring(vector<string>&, ifstream const);
+    int randomPicking();
+
 int main()
 {
     srand(time(NULL));
-    unsigned int opus = 0;
-    do {
-        cout << "Enter the episode of Civilization you want to play (a number between 1 and 6) : ";
-        cin >> opus;
-        cout << endl;
-    } while ((opus < 1) or (opus > 6));
+
+    unsigned int opus = opusChoice();
+    vector<string> leaders;
+
 
     // Picking the civ according to the opus choosen by the player
     switch (opus) {
@@ -34,11 +36,8 @@ int main()
             if(!ist) cout << "ERROR : can't open file";
 
             //storing the list in a vector
-            vector<string> leaders;
-            string line;
-            while(getline(ist, line)){
-                leaders.push_back(line);
-            }
+            listVectoring(leaders, ist);
+
 
             //picking a random leader
             int numberOfChoice = leaders.size();
@@ -47,7 +46,6 @@ int main()
             cout << "Picked leader : " << leaders[leader-1];
             cout << endl;
 
-
             break;
     }
 
@@ -55,3 +53,24 @@ int main()
 
     return 0;
 }
+
+
+
+unsigned int opusChoice(){
+    unsigned int opus;
+    do {
+        cout << "Enter the episode of Civilization you want to play (a number between 1 and 6) : ";
+        cin >> opus;
+        cout << endl;
+    } while ((opus < 1) or (opus > 6));
+    return opus;
+}
+
+void listVectoring(vector<string>& l, ifstream const i){
+    string line;
+    while(getline(i, line)){
+        l.push_back(line);
+    }
+
+}
+
