@@ -6,9 +6,9 @@
 
 using namespace std;
 
-    unsigned int opusChoice(); // Choosing the right Civ game
-    void listVectoring(vector<string>&, ifstream const);
-    int randomPicking();
+unsigned int opusChoice(); // Choosing the right Civ game
+int randomPicking(vector<string> const&); //picking a random leader
+void result (vector<string> const&, int const&); // announcing the results
 
 int main()
 {
@@ -34,18 +34,12 @@ int main()
             //Opening and testing the opening of the civ list file
             ifstream ist {"civ6_list.txt"};
             if(!ist) cout << "ERROR : can't open file";
-
-            //storing the list in a vector
-            listVectoring(leaders, ist);
-
-
-            //picking a random leader
-            int numberOfChoice = leaders.size();
-            int leader = (rand() % (numberOfChoice - 1 + 1)) + 1;
-
-            cout << "Picked leader : " << leaders[leader-1];
-            cout << endl;
-
+            //storing the file in a vector
+            string line;
+            while(getline(ist, line)){
+                leaders.push_back(line);
+            }
+            result(leaders, randomPicking(leaders));
             break;
     }
 
@@ -66,11 +60,17 @@ unsigned int opusChoice(){
     return opus;
 }
 
-void listVectoring(vector<string>& l, ifstream const i){
-    string line;
-    while(getline(i, line)){
-        l.push_back(line);
-    }
+int randomPicking (vector<string> const& l){
+    int numberOfChoice = l.size();
+    int leader = (rand() % (numberOfChoice - 1 + 1)) + 1;
+    return leader;
+}
+
+void result (vector<string> const& l, int const& r){
+    cout<< "Picked leader : " << l[r-1];
+    cout<< endl;
 
 }
+
+
 
