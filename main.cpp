@@ -20,17 +20,35 @@ int main()
 
     // Picking the civ according to the opus choosen by the player
     switch (opus) {
-        case (1) :
-            break;
-        case (2) :
-            break;
+        case (1) : {
+            //Opening and testing the opening of the civ list file
+            ifstream ist {"civ1_list.txt"};
+            if(!ist) cout << "ERROR : can't open file";
+            //storing the file in a vector
+            string line;
+            while(getline(ist, line)){
+                leaders.push_back(line);
+            }
+            result(leaders, randomPicking(leaders));
+            } break;
+        case (2) : {
+            //Opening and testing the opening of the civ list file
+            ifstream ist {"civ2_list.txt"};
+            if(!ist) cout << "ERROR : can't open file";
+            //storing the file in a vector
+            string line;
+            while(getline(ist, line)){
+                leaders.push_back(line);
+            }
+            result(leaders, randomPicking(leaders));
+            } break;
         case (3) :
             break;
         case (4) :
             break;
         case (5) :
             break;
-        case (6) :
+        case (6) : {
             //Opening and testing the opening of the civ list file
             ifstream ist {"civ6_list.txt"};
             if(!ist) cout << "ERROR : can't open file";
@@ -40,7 +58,7 @@ int main()
                 leaders.push_back(line);
             }
             result(leaders, randomPicking(leaders));
-            break;
+            } break;
     }
 
     system("pause");
