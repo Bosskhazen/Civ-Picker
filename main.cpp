@@ -53,8 +53,17 @@ int main()
             }
             print_result(leaders, randomPicking(leaders));
             } break;
-        case (4) :
-            break;
+        case (4) : {
+            //Opening and testing the opening of the civ list file
+            ifstream ist {"civ4_list.txt"};
+            if(!ist) cout << "ERROR : can't open file";
+            //storing the file in a vector
+            string line;
+            while(getline(ist, line)){
+                leaders.push_back(line);
+            }
+            print_result(leaders, randomPicking(leaders));
+            } break;
         case (5) :
             break;
         case (6) : {
