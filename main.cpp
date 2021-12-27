@@ -64,8 +64,17 @@ int main()
             }
             print_result(leaders, randomPicking(leaders));
             } break;
-        case (5) :
-            break;
+        case (5) : {
+            //Opening and testing the opening of the civ list file
+            ifstream ist {"civ5_list.txt"};
+            if(!ist) cout << "ERROR : can't open file";
+            //storing the file in a vector
+            string line;
+            while(getline(ist, line)){
+                leaders.push_back(line);
+            }
+            print_result(leaders, randomPicking(leaders));
+            } break;
         case (6) : {
             //Opening and testing the opening of the civ list file
             ifstream ist {"civ6_list.txt"};
@@ -86,13 +95,36 @@ int main()
 
 
 
-unsigned int opusChoice(){
+
+
+/*unsigned int opusChoice(){
     unsigned int opus;
     do {
+        try{
         cout << "Enter the episode of Civilization you want to play (a number between 1 and 6) : ";
         cin >> opus;
+
+           if (!cin) throw runtime_error("Wrong Input. Please enter an integer between 1 and 6");
+        }
+        catch(runtime_error& err){
+            cerr << err.what()
+                << "\nTry Again ? Enter y or n" << endl;
+            char c;
+            cin >> c;
+            if(!cin || c == 'n') break;
+        }
         cout << endl;
     } while ((opus < 1) or (opus > 6));
+    return opus;
+}*/
+
+unsigned int opusChoice() {
+    cout << "Enter the episode of Civilization you want to play (a number between 1 and 6) : ";
+    unsigned int opus;
+    while (cin >> opus){
+        if ((1 <= opus) && (opus <= 6)) break;
+        cout << "Wrong Input. Please enter an integer between 1 and 6\n";
+    }
     return opus;
 }
 
@@ -107,6 +139,7 @@ void print_result (vector<string> const& l, int const& r){
     cout<< endl;
 
 }
+
 
 
 
